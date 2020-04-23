@@ -91,5 +91,4 @@ class Retries(Middleware):
             max_backoff = min(max_backoff, DEFAULT_MAX_BACKOFF)
             _, delay = compute_backoff(retries, factor=min_backoff, max_backoff=max_backoff)
 
-        self.logger.info("Retrying message %r in %d milliseconds.", message.message_id, delay)
         broker.enqueue(message, delay=delay)
